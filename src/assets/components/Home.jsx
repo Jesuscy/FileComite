@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header } from '../common/Header'
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
+
+    const serverPort = [3000]
+    const [selectedServer, selectServer] = useState()
+
+
 
     const listMeetings = () => {
         return (
@@ -10,7 +16,7 @@ export const Home = () => {
                     <strong>FileCommite</strong>
                 </div>
                 <div className="col-md-4 meeting-specs">{/*Botones Conectar / Desconectar */}
-                    <button>Go</button>
+                    <Link to='/meeting'><button>Go</button></Link>
                     <button>Delete</button>
 
                 </div>

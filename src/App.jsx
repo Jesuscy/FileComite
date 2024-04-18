@@ -9,12 +9,15 @@ function App() {
   return (
     <>
       <Router>
+        <Home />
+
         <Routes>
+          <Route path='/meeting' element={<Meeting />} />
 
         </Routes>
+
       </Router>
 
-      <Home />
     </>
   )
 }
