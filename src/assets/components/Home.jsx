@@ -11,28 +11,49 @@ export const Home = () => {
 
     const listMeetings = () => {
         return (
+
             <div className="row meeting-row">
-                <div className="col-md-8 meeting-specs">{/*Nombre Reunion */}
-                    <strong>FileCommite</strong>
-                </div>
-                <div className="col-md-4 meeting-specs">{/*Botones Conectar / Desconectar */}
-                    <Link to='/meeting'><button>Go</button></Link>
-                    <button>Delete</button>
+
+                <div className="col-md-8 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
+                    <Link to='/meeting'>
+                        <strong>FileCommite</strong>
+                    </Link>
 
                 </div>
+
+                <div className="col-md-4 col-sm-12 col-xs-12 meeting-specs-button">{/*Botones Conectar / Desconectar */}
+                    <strong>X</strong>
+                </div>
             </div>
+
         )
 
     }
+
+
     return (
         <>
             <Header />
-            <div className="container meetings-section">
-                <div className="col-md-6 meetings-container">
-                    {listMeetings()}
+
+            <body>
+                <div className="meetings-section">
+                    <div className="col-md-2 col-sm-4 col-xs-4 meetings-info">
+                        <div className="row meetings-info-header">
+                            <p>Recent Meetings</p>
+                        </div>
+                        {listMeetings()}
+
+                        <div className="row meetings-info-header">
+                            <p>Messages</p>
+                        </div>
+
+                    </div>
+                    <div className="col-md-8 col-sm-8 col-xs-8 meetings-container">
+
+                    </div>
 
                 </div>
-            </div>
+            </body>
         </>
     )
 }

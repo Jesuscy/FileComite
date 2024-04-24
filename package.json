@@ -10,6 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/source-code-pro": "^5.0.19",
+    "@fontsource/dm-mono": "^5.0.20",
+    "@fontsource/krona-one": "^5.0.13",
+    "@fontsource/major-mono-display": "^5.0.20",
+    "@fontsource/material-icons": "^5.0.18",
+    "@fontsource/share-tech-mono": "^5.0.12",
+    "@fontsource/ubuntu": "^5.0.13",
+    "@fontsource/ubuntu-mono": "^5.0.20",
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -6,8 +6,8 @@ export const Header = () => {
     return (
         <>
             <div className="row header">
-                <div className="col-md-3"><img src={logo} /></div>
-                <div className="col-md-6"><h1>SHARE FILES</h1></div>
+                <div className="col-md-3"><h3>FileComite</h3></div>
+                <div className="col-md-6">SHARE FILES</div>
                 <div className="col-md-3"><h3>INFO</h3></div>
             </div>
         </>
