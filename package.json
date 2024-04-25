@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/baloo-2": "^5.0.20",
     "@fontsource-variable/source-code-pro": "^5.0.19",
     "@fontsource/dm-mono": "^5.0.20",
     "@fontsource/krona-one": "^5.0.13",
