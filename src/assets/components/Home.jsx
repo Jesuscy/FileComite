@@ -11,18 +11,19 @@ export const Home = () => {
 
     const listMeetings = () => {
         return (
+            <div className="col-md-12">
+                <div className="row meeting-row">
 
-            <div className="row meeting-row">
+                    <div className="col-md-9 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
+                        <Link to='/meeting'>
+                            <strong>FileCommite</strong>
+                        </Link>
 
-                <div className="col-md-8 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
-                    <Link to='/meeting'>
-                        <strong>FileCommite</strong>
-                    </Link>
+                    </div>
 
-                </div>
-
-                <div className="col-md-4 col-sm-12 col-xs-12 meeting-specs-button">{/*Botones Conectar / Desconectar */}
-                    <strong>X</strong>
+                    <div className="col-md-3 col-sm-12 col-xs-12 meeting-specs-button">{/*Botones Conectar / Desconectar */}
+                        <strong>X</strong>
+                    </div>
                 </div>
             </div>
 
@@ -34,26 +35,29 @@ export const Home = () => {
     return (
         <>
             <Header />
+            <div className="row meetings-section">
+                <div className="col-md-2 meetings-info">
+                    <div className="row recent-meetings"><p>Recent Meetings</p>
+                        <div className="col-md-12 comp-list">
+                            {listMeetings()}
 
-            <body>
-                <div className="meetings-section">
-                    <div className="col-md-2 col-sm-4 col-xs-4 meetings-info">
-                        <div className="row meetings-info-header">
-                            <p>Recent Meetings</p>
-                        </div>
-                        {listMeetings()}
 
-                        <div className="row meetings-info-header">
-                            <p>Messages</p>
                         </div>
 
-                    </div>
-                    <div className="col-md-8 col-sm-8 col-xs-8 meetings-container">
+                        <p>Recent Messages</p>
 
+                        <div className="col-md-12 comp-list">
+                            {listMeetings()}
+                            {listMeetings()}
+                            {listMeetings()}
+                        </div>
                     </div>
 
                 </div>
-            </body>
+                <div className="col-md-10 meetings-creator">
+                    HOLAS
+                </div>
+            </div>
         </>
     )
 }

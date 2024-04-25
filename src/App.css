@@ -9,55 +9,41 @@
 
 
 
-#root {}
+#root {
+  background-color: #242424;
 
-body {
-  height: 85vh;
 }
+
+
 
 /*HEADER STYLES*/
 .header {
   display: flex;
   text-align: center;
   align-items: center;
-  min-height: 15vh;
-  max-height: 15vh;
   font-family: 'Major Mono Display', monospace;
   font-weight: 400;
   font-style: normal;
-  font-size: 60px;
+  font-size: 70px;
   background-color: rgb(158, 228, 137);
-  margin-bottom: 15px;
   box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
+  margin: 15px;
 }
+
 
 /*HEADERS ENDS*/
 
 
 /*HOME STYLES*/
-.meetings-container {
 
-  background-color: rgb(224, 223, 223);
-  border-radius: 3px;
-  padding: 30px;
-  margin: 10vh auto;
 
-}
-
-.meetings-section {
-  display: flex;
-  justify-content: center;
-}
 
 .meeting-row {
   display: flex;
   font-family: 'DM Mono', monospace;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  box-shadow: rgba(36, 36, 36, 0.678) 0px 7px 29px 0px;
   font-size: 18px;
-  border-radius: 10px;
-  min-height: 40px;
-  margin: 10px;
-  transform: scale(0.9);
+  margin: 20px;
   transition: 0.3s ease;
 }
 
@@ -65,51 +51,62 @@ body {
 
 
 .meeting-row:hover {
-  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
-  transform: scale(1);
+  box-shadow: rgba(43, 43, 44, 0.3) 0px 0px 0px 0px;
 }
 
 .meeting-specs-name {
-  background-color: rgb(247, 247, 247);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  background-color: rgb(226, 226, 226);
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .meeting-specs-button {
-  background-color: rgb(236, 243, 137);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background-color: rgb(255, 131, 131);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  transition: 0.3s ease;
+  color: black;
+
+}
+
+.meeting-specs-button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 
-.meeting-specs button {
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 100%;
-  font-size: 20px;
-  font-family: 'Material Icons', sans-serif;
 
-
-}
 
 .meetings-info {
+  display: flex;
+  font-family: 'Share Tech Mono', monospace;
+  margin-top: 15px;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+
+}
+
+
+
+.recent-meetings {
+  display: flex;
+  font-size: 22px;
+  padding: 40px;
+  color: white;
+}
+
+
+.meetings-actions {
   background-color: rgba(121, 121, 121, 0.418);
   font-family: 'Share Tech Mono', monospace;
+  margin-top: 10vh auto;
   padding: 30px;
-  height: 85vh;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 
-.meetings-info-header {
-  font-size: 22px;
-  font-weight: 600;
-
-}
 
 /*HOME ENDS*/
