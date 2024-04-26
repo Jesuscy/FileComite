@@ -6,9 +6,14 @@ import { NewMeeting } from '../common/NewMeeting'
 export const Home = () => {
 
     const serverPort = [3000]
+    //UseState para controlar el server seleccionado.
     const [selectedServer, selectServer] = useState()
+    //UseState para controlar si Meeting info se muestra.
+    const [showMeetingsInfo, setShowMeetingInfo] = useState(true)
 
-
+    const toggleMeetingsInfo = () =>{
+        setShowMeetingInfo(!showMeetingsInfo)
+    }
 
     const listMeetings = () => {
         return (
@@ -16,7 +21,7 @@ export const Home = () => {
                 <div className="row meeting-row">
 
                     <div className="col-md-9 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
-                        <Link to='/meeting'>
+                        <Link to='/meeting' style={{ textDecoration: 'none', color: 'black' }}>
                             <strong>FileCommite</strong>
                         </Link>
 
@@ -37,7 +42,8 @@ export const Home = () => {
         <>
             <Header />
             <div className="row meetings-section">
-                <div className="col-md-2 col-sm-12 col-xs-12 meetings-info">
+                {/*Start Meetings Info Section */}
+                {showMeetingsInfo && (<div className="col-md-3 col-sm-12 col-xs-12 meetings-info">
                     <div className="row recent-meetings">
                         <div className="col-md-12">
                             <p>Recent Meetings</p>
@@ -54,13 +60,17 @@ export const Home = () => {
                             {listMeetings()}
                         </div>
                     </div>
-
                 </div>
-                <div className="col-md-10 col-sm-12 col-xs-12">
+
+                )}
+
+                {/*End Meetings Info Section */}
+
+                <div className={`col-md-${showMeetingsInfo ? '9' : '12'} col-sm-12 col-xs-12`}>
 
                     <div className="container">
                         <div className="meetings-creator">
-                            <div className="col-md-3 meetings-options">
+                            <div className="col-md-3  meetings-options">
                                 <div className="row">
                                     <div className="col-md-12">
                                         <div className="meeting-option">
@@ -77,14 +87,22 @@ export const Home = () => {
                                             Info and tutorials.
                                         </div>
                                     </div>
+                                    <div className="col-md-12">
+                                        <div className="meeting-option">
+                                            <div onClick={toggleMeetingsInfo}>
+                                                {showMeetingsInfo ? 'Hide Meetings Info' : 'Show Meetings Info'}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
                             </div>
-                            <div className="col-md-9">{<NewMeeting />}</div>
+                            <div className="col-md-9">{showMeetingsInfo && <NewMeeting />}
+                            </div>
 
 
-
+                           
                         </div>
                     </div>
                 </div>

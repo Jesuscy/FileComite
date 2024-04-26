@@ -8,13 +8,13 @@ export const Header = () => {
         <>
             <div className="row header">
                 <div className="col-md-3">
-                    <h4>FileComite</h4>
+                    <h2>FileComite</h2>
                 </div>
                 <div className="col-md-6 share-files">
                     SHARE FILES
                 </div>
                 <div className="col-md-3">
-                    <h4>INFO</h4>
+                    <h2>INFO</h2>
                 </div>
             </div>
         </>
