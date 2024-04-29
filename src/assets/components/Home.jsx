@@ -84,7 +84,7 @@ export const Home = () => {
                                     </div>
                                     <div className="col-md-12">
                                         <div className="meeting-option">
-                                            Info and tutorials.
+                                            Info and tutorials
                                         </div>
                                     </div>
                                     <div className="col-md-12">

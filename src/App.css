@@ -189,9 +189,32 @@
   font-weight: 600;
 }
 
-.create-meeting-input {
+
+.create-meeting-step{
+  display: flex;
+  align-items: center;
+  margin: 20px auto;
+  font-size: 40px;
+  font-family:'Major Mono Display', monospace;
+  font-weight: 600;
+  color: #dfdfdffb;
   display: flex;
   flex-direction: column;
+
+}
+.create-meeting-step input{
+  margin: 50px;
+  border-radius: 10px;
+  padding: 10px;
+  border: 3px solid rgb(255, 255, 255);;
+  color: #dfdfdffb;
+  font-family: 'Baloo 2 Variable', system-ui;
+  font-weight: 400;
 }
 
+.create-meeting-step input:focus{
+  border: 3px solid rgb(0, 255, 21);;
+
+
+}
 /*FIN NewMeeting*/
