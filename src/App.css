@@ -191,7 +191,6 @@
 
 
 .create-meeting-step{
-  display: flex;
   align-items: center;
   margin: 20px auto;
   font-size: 40px;
@@ -200,8 +199,12 @@
   color: #dfdfdffb;
   display: flex;
   flex-direction: column;
+  transition: 1s ease-in-out;
+  
 
 }
+
+
 .create-meeting-step input{
   margin: 50px;
   border-radius: 10px;
@@ -209,7 +212,8 @@
   border: 3px solid rgb(255, 255, 255);;
   color: #dfdfdffb;
   font-family: 'Baloo 2 Variable', system-ui;
-  font-weight: 400;
+  font-weight: 400; 
+  text-align: center;
 }
 
 .create-meeting-step input:focus{
@@ -217,4 +221,18 @@
 
 
 }
+.create-meeting-step button{
+  
+  margin: 250px auto; 
+  font-size: 22px;
+  border-radius: 10px;
+  background-color: rgb(141, 54, 175);
+}
+.step{
+  text-align: center;
+  position: absolute;
+  margin: 20px;
+
+}
+
 /*FIN NewMeeting*/

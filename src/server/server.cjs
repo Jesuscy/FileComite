@@ -10,6 +10,23 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+
+
+// Ruta para crear una nueva reunión y su carpeta correspondiente
+app.post('/create-meeting', (req, res) => {
+    const meetingId = req.body.meetingId;
+    const meetingFolder = `public/meetings/${meetingId}`;
+    if (!fs.existsSync(meetingFolder)) {
+        fs.mkdirSync(meetingFolder, { recursive: true });
+        res.send(`Carpeta para la reunión ${meetingId} creada exitosamente`);
+    } else {
+        res.send(`La carpeta para la reunión ${meetingId} ya existe`);
+    }
+});
+
+
+
+
 /*Las funicones cb (CallBack) se usan para pasar 
 al multer el destino y nombre del archivo,
 que guardo en storage.*/
@@ -28,6 +45,10 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
+
+
+
+
 
 const upload = multer({ storage });
 
