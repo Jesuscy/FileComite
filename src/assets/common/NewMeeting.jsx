@@ -8,7 +8,7 @@ export const NewMeeting = () => {
         if(currentStepIndex > totalSteps.length){
         const currentStep = document.getElementById(`step${currentStepIndex}`)
         currentStep.classList.add('step-hidden')
-        const nextStep = document.getElementById(`step${currentStepIndex+1}`)
+        const nextngoStep = document.getElementById(`step${currentStepIndex+1}`)
         }
     }
     const backStep = (steps, currentStepIndex)=>{
