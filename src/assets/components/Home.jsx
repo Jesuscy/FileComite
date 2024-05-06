@@ -17,7 +17,6 @@ export const Home = () => {
 
     const listMeetings = () => {
         return (
-            <div className="col-md-12">
                 <div className="row meeting-row">
 
                     <div className="col-md-9 col-sm-12 col-xs-12 meeting-specs-name">{/*Nombre Reunion */}
@@ -31,7 +30,6 @@ export const Home = () => {
                         <strong>X</strong>
                     </div>
                 </div>
-            </div>
 
         )
 
@@ -69,8 +67,8 @@ export const Home = () => {
                 <div className={`col-md-${showMeetingsInfo ? '9' : '12'} col-sm-12 col-xs-12`}>
 
                     <div className="container">
-                        <div className="meetings-creator">
-                            <div className="col-md-3  meetings-options">
+                        <div className="row meetings-creator">
+                            <div className="col-md-3 col-sm-12 col-xs-12 meetings-options">
                                 <div className="row">
                                     <div className="col-md-12">
                                         <div className="meeting-option">
@@ -98,9 +96,8 @@ export const Home = () => {
 
 
                             </div>
-                            <div className="col-md-9">{showMeetingsInfo && <NewMeeting />}
+                            <div className="col-md-9 col-sm-12 col-xs-12">{<NewMeeting/>}
                             </div>
-
 
                            
                         </div>
