@@ -12,7 +12,7 @@ const userSchema = new moongose.Schema(
             type:String,
             required:true
         },
-        role: String
+        rol: String
 
-    }    
-    )
+    })
+    module.exports = {userSchema}

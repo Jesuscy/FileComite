@@ -21,3 +21,5 @@ const fileSchema = new mongoose.Schema(
 
     }
 )
+
+module.exports = {fileSchema}
