@@ -1,5 +1,5 @@
 const express = require('express')
-const fileRouter = express.Router
+const fileRouter = express.Router()
 
 fileRouter.get("/download")
 fileRouter.post("/upload")

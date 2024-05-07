@@ -1,5 +1,5 @@
 const express = require('express')
-const authRouter = express.Router
+const authRouter = express.Router()
 
 //Obtener Usuarios.
 authRouter.post("/login")

@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-
-const {connect} = require('../src/utils/db')
+const fileRouter = require('./src/routes/file.router')
+const authRouter = require('./src/routes/auth.router')
+const meetingRouter = require('./src/routes/meeting.router')
+const {connect} = require('./src/utils/db')
 
 require('dotenv').config();
 
@@ -12,10 +13,9 @@ const app = express();
 app.use(express.json());
 
 // Routes
-/*
 app.use('/auth', authRouter);
 app.use('/file', fileRouter);
-*/
+app.use('/meeting', meetingRouter)
 
 app.get('/', (request, response) => {
     response.status(200).json({

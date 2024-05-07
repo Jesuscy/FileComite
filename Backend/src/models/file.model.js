@@ -1,25 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const fileSchema = new mongoose.Schema(
-    {
-        filename:{
-            type: String,
-            required: true
-        },
-        path:{
-            type: String,
-            required: true,
-            unique: true
-        },
-        rol:{ 
-            type: String,
-            required: true,
-            unique: false
+const fileSchema = new mongoose.Schema({
+  filename: {
+    type: String,
+    required: true,
+  },
+  path: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  rol: {
+    type: String,
+    required: true,
+    unique: false,
+  },
+});
 
-
-        }
-
-    }
-)
-
-module.exports = {fileSchema}
+module.exports = { fileSchema };
