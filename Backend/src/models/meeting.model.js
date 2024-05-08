@@ -11,6 +11,8 @@ const meetingSchema = new mongoose.Schema({
     unique: true,
   },
   meetingRoles: [{ type: String }],
+  meetingUsers: [{type: mongoose.Schema.Types.ObjectId, ref:'Users'}]
 });
 
-module.exports = { meetingSchema };
+const Meeting = mongoose.model('Meeting',meetingSchema,'meetings');
+module.exports = Meeting

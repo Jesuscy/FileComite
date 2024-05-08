@@ -11,5 +11,11 @@ const userSchema = new moongose.Schema({
     required: true,
   },
   rol: String,
+  
+  meetings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meeting' }] 
+
 });
-module.exports = { userSchema };
+
+const User = mongoose.model('User',userSchema,'users');
+
+module.exports = User
