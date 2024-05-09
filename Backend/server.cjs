@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fileRouter = require('./src/routes/file.router')
-const authRouter = require('./src/routes/auth.router')
+const authRouter = require('./src/routes/user.router')
 const meetingRouter = require('./src/routes/meeting.router')
 const {connect} = require('./src/utils/db')
 
@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use('/auth', authRouter);
+app.use('/user', authRouter);
 app.use('/file', fileRouter);
 app.use('/meeting', meetingRouter)
 
