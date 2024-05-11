@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new moongose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -10,9 +10,9 @@ const userSchema = new moongose.Schema({
     type: String,
     required: true,
   },
-  rol: String,
+  rol: [{type:String}],
   
-  meetings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meeting' }] 
+  mettings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Metting' }] 
 
 });
 
