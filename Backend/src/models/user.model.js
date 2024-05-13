@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   rol: [{type:String}],
   
-  mettings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Metting' }] 
+  meetings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Metting' }] 
 
 });
 

@@ -8,7 +8,7 @@ const getUser = async (req, res, next) => {
     try {
         //Obtiene el usuario con el mail
         const mail = req.params.mail
-        const user = await User.findOne({ username: mail })
+        const user = await User.findOne({username: mail})
         if (user) {
             res.status(201).json({
                 status: 201,
@@ -42,7 +42,7 @@ const createUser = async (req, res, next) => {
             username: mail,
             password : password,
             rol:[],
-            mettings:[]
+            meetings:[]
         })
         await user.save()
         //Devuelvo el user creado
