@@ -15,6 +15,7 @@ const getMeeting = async (req, res, next) => {
         }
     }
     catch (error) {
+        next(error)
         res.status(500).json({
             status: 500,
             message: "Internal Server Error",
@@ -34,6 +35,7 @@ const getMeeting = async (req, res, next) => {
             }
         }
         catch (error) {
+            next(error)
             res.status(500).json({
                 status: 500,
                 message: "Internal Server Error",
@@ -62,11 +64,12 @@ const getMeeting = async (req, res, next) => {
             meeting.save()
             res.status(201).json({
                 status: 201,
-                message: "Meeting sucessfully created",
+                message: "Meeting successfully created",
                 meeting: meeting
             })
         }
         catch (error) {
+            next(error)
             res.status(500).json({
                 status: 500,
                 message: "Internal server error"
@@ -74,7 +77,34 @@ const getMeeting = async (req, res, next) => {
         }
     }
 
+    const deleteMeeting = async (req, res, next) => {
+        try {
+            const meetingId = req.params.meetingId;
+    
+            const deletedMeeting = await Meeting.findByIdAndDelete(meetingId);
+    
+            if (deletedMeeting) {
+                res.status(200).json({
+                    status: 200,
+                    message: "Meeting successfully deleted"
+                })
+            } else {
+                res.status(404).json({
+                    status: 404,
+                    message: "Meeting not found"
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                error: error.message
+            })
+        }
+    }
 
+
+    
     const getUserMeetings = async (req, res, next) => {
         try {
             const userId = req.params.userId
@@ -88,6 +118,7 @@ const getMeeting = async (req, res, next) => {
             }
         }
         catch (error) {
+            next(error)
             res.status(500).json({
                 status: 500,
                 message: "Internal Server Error",
