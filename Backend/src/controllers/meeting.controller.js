@@ -80,9 +80,9 @@ const getMeeting = async (req, res, next) => {
     const deleteMeeting = async (req, res, next) => {
         try {
             const meetingId = req.params.meetingId;
-    
+
             const deletedMeeting = await Meeting.findByIdAndDelete(meetingId);
-    
+
             if (deletedMeeting) {
                 res.status(200).json({
                     status: 200,
@@ -104,7 +104,7 @@ const getMeeting = async (req, res, next) => {
     }
 
 
-    
+
     const getUserMeetings = async (req, res, next) => {
         try {
             const userId = req.params.userId
@@ -124,6 +124,38 @@ const getMeeting = async (req, res, next) => {
                 message: "Internal Server Error",
                 error: error.message
             })
+        }
+    }
+
+
+    const addUserMeeting = async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const editMeeting = new Meeting(req.body)
+            editMeeting._id = id
+            const updatedMeeting = await Meeting.findByIdAndUpdate(id, editMeeting)
+            if (!updatedMeeting) {
+                return res.status(404).json({ message: 'Meeting id not found' })
+            }
+            return res.status(200).json({ updatedMeeting })
+        }
+        catch (error) {
+            return res.status(500).json(error);
+
+        }
+    }
+
+    const delUserMeeting = async (req, res, next) => {
+        try {
+            const id = req.params.id
+            const deleteMeeting = await Meeting.findByIdAndDelete(id)
+            if (!deleteMeeting) {
+                return res.status(404).json({ message: 'Meeting id not found' })
+            }
+            return res.status(200).json({ deleteMeeting })
+        }
+        catch (error) {
+            return res.status(500).json(error)
         }
     }
 }
