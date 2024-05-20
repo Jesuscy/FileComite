@@ -24,43 +24,6 @@ const getUser = async (req, res, next) => {
 
 }
 
-const createUser = async (req, res, next) => {
-    try {
-        //Obtengo el mail y password del body.
-        const {mail, password} = req.body
-        //Compruebo que no hayan usuarios con es mail.
-        const existingUser = new User.findOne({ username: mail})
-
-        if(existingUser){
-            return res.status(400).json({
-                status:400,
-                message:"Mail already registered" 
-            })
-        }
-        //Creo el user con los datos introducidos y lo guardo.
-        const user = new User({
-            username: mail,
-            password : password,
-            rol:[],
-            meetings:[]
-        })
-        await user.save()
-        //Devuelvo el user creado
-        res.status(201).json({
-            status: 201,
-            message: HTTPSTATUSCODE[201],
-            user: user
-        })
-
-    }
-    catch (error) {
-        next(error)
-        res.status(500).json({ message: 'Error interno del servidor.' });
-    }
-}
-
-
-
 const logUser = async (req, res, next) => {
     try {
         //Obtengo Mail y Password 
@@ -100,5 +63,61 @@ const logUser = async (req, res, next) => {
         })
     }
 }
+
+
+const createUser = async (req, res, next) => {
+    try {
+        //Obtengo el mail y password del body.
+        const {mail, password} = req.body
+        //Compruebo que no hayan usuarios con es mail.
+        const existingUser = new User.findOne({ username: mail})
+
+        if(existingUser){
+            return res.status(400).json({
+                status:400,
+                message:"Mail already registered" 
+            })
+        }
+        //Creo el user con los datos introducidos y lo guardo.
+        const user = new User({
+            username: mail,
+            password : password,
+            rol:[],
+            meetings:[]
+        })
+        await user.save()
+        //Devuelvo el user creado
+        res.status(201).json({
+            status: 201,
+            message: HTTPSTATUSCODE[201],
+            user: user
+        })
+
+    }
+    catch (error) {
+        next(error)
+        res.status(500).json({message: 'Iternal server error.'});
+    }
+}
+
+const deleteUser = async (req,res,next) =>{
+    const userId = req.params.userId
+    const password = req.params.password
+    //Obtengo user por id
+    const user = await User.findById(userId) 
+
+    if(!user){
+        return res.status(404).json({message:"User not found."})
+    }
+    const isPassworValid = bcrypt.compare(password, user.password)
+
+    if(!isPassworValid){
+        return res.status(401).json({message:"Incorrect password"})
+    }
+    await User.findByIdAndDelete(userId)
+    res.status(200).json({message:"User succesfully deleted"})
+}
+
+
 
 module.exports = { getUser, createUser, logUser }
