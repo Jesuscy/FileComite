@@ -8,7 +8,7 @@ const getUser = async (req, res, next) => {
     try {
         //Obtiene el usuario con el mail
         const mail = req.params.mail
-        const user = await User.findOne({username: mail})
+        const user = await User.findOne({ username: mail })
         if (user) {
             res.status(201).json({
                 status: 201,
@@ -22,6 +22,28 @@ const getUser = async (req, res, next) => {
         next(error)
     }
 
+}
+
+const getUsers = async (req, res, next) => {
+    try {
+        //Obtengo todos los users
+        const users = User.find()
+        if (users) {
+            res.status(200).json({
+                status: 200,
+                message: HTTPSTATUSCODE[200],
+                users: users
+            })
+        }
+    }
+    catch (error) {
+        next(error)
+        res.status(500).json({
+            status: 500,
+            message: "Internal Server Error",
+            error: error.message
+        })
+    }
 }
 
 const logUser = async (req, res, next) => {
@@ -68,25 +90,25 @@ const logUser = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     try {
         //Obtengo el mail y password del body.
-        const {mail, password} = req.body
+        const { mail, password } = req.body
         //Compruebo que no hayan usuarios con es mail.
-        const existingUser = new User.findOne({ username: mail})
+        const existingUser = new User.findOne({ username: mail })
 
-        if(existingUser){
+        if (existingUser) {
             return res.status(400).json({
-                status:400,
-                message:"Mail already registered" 
+                status: 400,
+                message: "Mail already registered"
             })
         }
         //Hasheo la password que guardo de BD.
-        const hassedPassword = await bcrypt.hash(password,10)
+        const hassedPassword = await bcrypt.hash(password, 10)
 
         //Creo el user con los datos introducidos y lo guardo.
         const user = new User({
             username: mail,
-            password : hassedPassword,
-            rol:[],
-            meetings:[]
+            password: hassedPassword,
+            rol: [],
+            meetings: []
         })
         await user.save()
         //Devuelvo el user creado
@@ -99,28 +121,28 @@ const createUser = async (req, res, next) => {
     }
     catch (error) {
         next(error)
-        res.status(500).json({message: 'Iternal server error.'});
+        res.status(500).json({ message: 'Iternal server error.' });
     }
 }
 
-const deleteUser = async (req,res,next) =>{
+const deleteUser = async (req, res, next) => {
     const userId = req.params.userId
     const password = req.params.password
     //Obtengo user por id
-    const user = await User.findById(userId) 
+    const user = await User.findById(userId)
 
-    if(!user){
-        return res.status(404).json({message:"User not found."})
+    if (!user) {
+        return res.status(404).json({ message: "User not found." })
     }
     const isPassworValid = bcrypt.compare(password, user.password)
 
-    if(!isPassworValid){
-        return res.status(401).json({message:"Incorrect password"})
+    if (!isPassworValid) {
+        return res.status(401).json({ message: "Incorrect password" })
     }
     await User.findByIdAndDelete(userId)
-    res.status(200).json({message:"User succesfully deleted"})
+    res.status(200).json({ message: "User succesfully deleted" })
 }
 
 
 
-module.exports = { getUser, createUser, logUser }
+module.exports = { getUser, getUsers, createUser, logUser }
