@@ -78,10 +78,13 @@ const createUser = async (req, res, next) => {
                 message:"Mail already registered" 
             })
         }
+        //Hasheo la password que guardo de BD.
+        const hassedPassword = await bcrypt.hash(password,10)
+
         //Creo el user con los datos introducidos y lo guardo.
         const user = new User({
             username: mail,
-            password : password,
+            password : hassedPassword,
             rol:[],
             meetings:[]
         })
