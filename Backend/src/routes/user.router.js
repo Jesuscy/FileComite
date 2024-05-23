@@ -7,5 +7,6 @@ authRouter.get("/get", getUser)
 authRouter.get("/getUsers", getUsers)
 authRouter.post("/log", logUser)
 authRouter.post("/register", createUser)
+authRouter.post("/create", createUser)
 
 module.exports = authRouter

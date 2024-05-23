@@ -27,7 +27,7 @@ const getUser = async (req, res, next) => {
 const getUsers = async (req, res, next) => {
     try {
         //Obtengo todos los users
-        const users = User.find()
+        const users = await User.find()
         if (users) {
             res.status(200).json({
                 status: 200,
@@ -88,11 +88,15 @@ const logUser = async (req, res, next) => {
 
 
 const createUser = async (req, res, next) => {
+  
+    const mail = req.params.mail
+    const password = req.params.password
+    console.log(mail,password)
     try {
-        //Obtengo el mail y password del body.
-        const { mail, password } = req.body
+        //Obtengo el mail y password.
+        const {mail, password} = req.body
         //Compruebo que no hayan usuarios con es mail.
-        const existingUser = new User.findOne({ username: mail })
+        const existingUser = await User.findOne({ username: mail })
 
         if (existingUser) {
             return res.status(400).json({
@@ -100,13 +104,15 @@ const createUser = async (req, res, next) => {
                 message: "Mail already registered"
             })
         }
+        const salt = await bcrypt.genSalt(10);
         //Hasheo la password que guardo de BD.
-        const hassedPassword = await bcrypt.hash(password, 10)
+        const hassedPassword = await bcrypt.hash(password, salt)
 
-        //Creo el user con los datos introducidos y lo guardo.
+        //Pass the salt value as an argument to bcrypt.hash()
         const user = new User({
             username: mail,
-            password: hassedPassword,
+            password: hassedPassword, // Store the hashed password
+            salt: salt, // Store the salt value
             rol: [],
             meetings: []
         })
@@ -124,7 +130,6 @@ const createUser = async (req, res, next) => {
         res.status(500).json({ message: 'Iternal server error.' });
     }
 }
-
 const deleteUser = async (req, res, next) => {
     const userId = req.params.userId
     const password = req.params.password
