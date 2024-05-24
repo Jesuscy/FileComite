@@ -7,7 +7,7 @@ const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 const getUser = async (req, res, next) => {
     try {
         //Obtiene el usuario con el mail
-        const mail = req.params.mail
+        const mail = req.body
         const user = await User.findOne({ username: mail })
         if (user) {
             res.status(201).json({
@@ -49,8 +49,7 @@ const getUsers = async (req, res, next) => {
 const logUser = async (req, res, next) => {
     try {
         //Obtengo Mail y Password 
-        const mail = req.params.mail
-        const password = req.params.password
+        const {mail, password} = req.body
         //Busco user en BD 
         const user = await User.findOne({ username: mail })
 
@@ -89,9 +88,6 @@ const logUser = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   
-    const mail = req.params.mail
-    const password = req.params.password
-    console.log(mail,password)
     try {
         //Obtengo el mail y password.
         const {mail, password} = req.body
@@ -131,8 +127,8 @@ const createUser = async (req, res, next) => {
     }
 }
 const deleteUser = async (req, res, next) => {
-    const userId = req.params.userId
-    const password = req.params.password
+   
+    const {userId, password} = req.body
     //Obtengo user por id
     const user = await User.findById(userId)
 

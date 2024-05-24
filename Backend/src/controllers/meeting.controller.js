@@ -5,7 +5,7 @@ const HTTPSTATUSCODE = require('../utils/httpStatusCode')
 //Obtener Meeting
 const getMeeting = async (req, res, next) => {
     try {
-        const meetingName = req.params.name
+        const meetingName = req.body
         const meeting = await Meeting.findOne({ meetingName: meetingName })
         if (meeting) {
             res.status(200).json({
@@ -86,7 +86,7 @@ const getMeeting = async (req, res, next) => {
     //Borrar meeting
     const deleteMeeting = async (req, res, next) => {
         try {
-            const meetingId = req.params.meetingId;
+            const meetingId = req.body
 
             const deletedMeeting = await Meeting.findByIdAndDelete(meetingId);
 
@@ -131,7 +131,7 @@ const getMeeting = async (req, res, next) => {
     //Obtener meetings del user
     const getUserMeetings = async (req, res, next) => {
         try {
-            const userId = req.params.userId
+            const userId = req.body
             const meetings = await Meeting.find({ meetingUsers: userId })
             if (meetings) {
                 res.status(200).json({
@@ -151,26 +151,48 @@ const getMeeting = async (req, res, next) => {
         }
     }
 
+    //Añadir user al meeting.
+    const addUserMeeting = async (req, res, next) => {
+        try {
+            const { meetingId, userId } = req.body;
+    
+            const meetingToMod = await Meeting.findById(meetingId);
+            if (!meetingToMod) {
+                return res.status(404).json({ message: 'Meeting id not found' });
+            }
+    
+            
+            if (!meetingToMod.meetingUsers.includes(userId)) {
+                meetingToMod.meetingUsers.push(userId);
+            }
+    
+            await meetingToMod.save();
+    
+            return res.status(200).json({ meetingToMod });
+        } catch (error) {
+            return res.status(500).json({ message: 'Error adding user to meeting', error });
+        }
+    }
 
     //Eliminar user de meeting.
     const delUserMeeting = async (req, res, next) => {
         try {
-            const meetingId = req.params.meetingId
-            const userId = req.params.userId
-            
-            const meetingToMod = await Meeting.findById(meetingId)
-            if(!meetingToMod){
-                return res.status(404).json({ message: 'Meeting id not found' })
+            const { meetingId, userId } = req.body;
+    
+            const meetingToMod = await Meeting.findById(meetingId);
+            if (!meetingToMod) {
+                return res.status(404).json({ message: 'Meeting id not found' });
             }
-            const meetingUsersMod = meetingToMod.meetingUsers.filter(user => user !== userId);
-            meetingToMod.meetingUsers = meetingUsersMod
-
-            return res.status(200).json({ meetingToMod })
-        }
-        catch (error) {
-            return res.status(500).json(error)
+    
+            meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user =>{user != userId})
+    
+            await meetingToMod.save();
+    
+            return res.status(200).json({ meetingToMod });
+        } catch (error) {
+            return res.status(500).json({ message: 'Error deleting user from meeting', error });
         }
     }
 
 
-module.exports = {getMeeting, getMeetings, createMeeting, deleteMeeting, getUserMeetings, editMeeting, delUserMeeting }
+module.exports = {getMeeting, getMeetings, createMeeting, addUserMeeting ,deleteMeeting, getUserMeetings, editMeeting, delUserMeeting }
