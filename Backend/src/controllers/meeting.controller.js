@@ -154,16 +154,16 @@ const getMeeting = async (req, res, next) => {
     //Añadir user al meeting.
     const addUserMeeting = async (req, res, next) => {
         try {
-            const { meetingId, userId } = req.body;
+            const { meetingId, userId, roles } = req.body;
     
             const meetingToMod = await Meeting.findById(meetingId);
             if (!meetingToMod) {
                 return res.status(404).json({ message: 'Meeting id not found' });
             }
     
-            
-            if (!meetingToMod.meetingUsers.includes(userId)) {
-                meetingToMod.meetingUsers.push(userId);
+            const userExists = meetingToMod.meetingUsers.some(user => user.userId.toString() === userId);
+            if (!userExists) {
+                meetingToMod.meetingUsers.push({userId,roles});
             }
     
             await meetingToMod.save();
@@ -184,7 +184,7 @@ const getMeeting = async (req, res, next) => {
                 return res.status(404).json({ message: 'Meeting id not found' });
             }
     
-            meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user =>{user != userId})
+            meetingToMod.meetingUsers = meetingToMod.meetingUsers.filter(user =>{user.userId.toString() != userId})
     
             await meetingToMod.save();
     

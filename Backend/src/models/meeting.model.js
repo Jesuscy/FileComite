@@ -1,4 +1,11 @@
 const mongoose = require("mongoose");
+
+const meetingUserSchema = new mongoose.Schema({
+
+  userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+  roles:[{type: String}]
+})
+
 const meetingSchema = new mongoose.Schema({
   meetingName: {
     type: String,
@@ -11,7 +18,7 @@ const meetingSchema = new mongoose.Schema({
     unique: true,
   },
   meetingRoles: [{ type: String }],
-  meetingUsers: [{type: mongoose.Schema.Types.ObjectId, ref:'Users'}]
+  meetingUsers: [meetingUserSchema]
 });
 
 const Meeting = mongoose.model('Meeting',meetingSchema,'meetings');
