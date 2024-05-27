@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const meetingUserSchema = new mongoose.Schema({
 
-  userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+  userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   roles:[{type: String}]
 })
 
