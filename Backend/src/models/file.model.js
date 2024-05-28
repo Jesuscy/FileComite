@@ -7,7 +7,7 @@ const fileSchema = new mongoose.Schema({
   },
   meetingData:{
     meetingId: { type: mongoose.Schema.Types.ObjectId, ref: 'Meeting' },
-    rol:{type: String, required: true}
+    rol:[{type: String, required: true}]
   }
 });
 
