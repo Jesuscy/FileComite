@@ -2,10 +2,6 @@ const File = require("../models/file.model");
 const HTTPSTATUSCODE = require('../utils/httpStatusCode');
 const mongoose = require("mongoose");
 
-//Grid herramienta utilizada para descargar los ficheros guardados en la base de datos.
-const Grid = require("gridfs-stream");
-//Obtengo la conexión con la base de datos.
-const conn = mongoose.connection;
 
 const getFiles = async (req,res,next)=>{
     try{
@@ -24,3 +20,21 @@ const getFiles = async (req,res,next)=>{
         res.status(500).json({message: 'Error retrieving files'})
     }
 }
+
+const createFile = async (req,res,next) =>{
+    try{
+        const file = new File(req.body)
+        if(req.file){
+            file.filepath = req.file.path
+        }
+        file.save()
+        return res.status(201).json(file)
+    }
+    catch(error){
+        return res.status(500).json({message: 'Error creating file'})
+
+    }
+}
+
+
+module.exports = {getFiles, createFile}

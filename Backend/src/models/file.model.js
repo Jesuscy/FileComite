@@ -5,11 +5,15 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  meetingData:{
+  filepath: {
+    type: String,
+    required: true,
+  },
+  meetingData: {
     meetingId: { type: mongoose.Schema.Types.ObjectId, ref: 'Meeting' },
-    rol:[{type: String, required: true}]
+    rol: [{ type: String, required: true }]
   }
 });
 
-const File = mongoose.model('File',fileSchema,'files');
+const File = mongoose.model('File', fileSchema, 'files');
 module.exports = File
