@@ -144,6 +144,22 @@ const deleteUser = async (req, res, next) => {
     res.status(200).json({ message: "User succesfully deleted" })
 }
 
+//Editar User
+const editUser = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const editUser = new User(req.body)
+        editUser._id = id
+        const updatedUser = await User.findByIdAndUpdate(id, editUser)
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User id not found' })
+        }
+        return res.status(200).json({ updatedUser })
+    }
+    catch (error) {
+        return res.status(500).json(error);
 
+    }
+}
 
 module.exports = { getUser, getUsers, createUser, logUser }
