@@ -3,10 +3,9 @@ const HTTPSTATUSCODE = require('../utils/httpStatusCode');
 const mongoose = require("mongoose");
 
 
-const getFiles = async (req,res,next)=>{
+const getFilesByMeeting = async (req,res) =>{
     try{
         const meetingId = req.body
-
         const files = await File.find({'meetingData.meetingId': meetingId})
 
         if (files.length === 0) {
@@ -37,4 +36,4 @@ const createFile = async (req,res,next) =>{
 }
 
 
-module.exports = {getFiles, createFile}
+module.exports = {getFilesByMeeting, createFile}
